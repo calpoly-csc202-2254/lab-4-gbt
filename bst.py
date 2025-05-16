@@ -15,7 +15,7 @@ class BinarySearchTree:
     def comes_before(listy):
         listy = []
         return listy - 1
-
+#a
     # Given a BinarySearchTree, return True if tree is empty, False otherwise
     def is_empty(self) -> bool:
         e = len(listy)
