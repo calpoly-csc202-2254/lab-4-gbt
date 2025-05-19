@@ -14,7 +14,7 @@ BinTree : TypeAlias = Union["BinarySearchTree", None]
         
 #determines if one value comes before another        
 def comes_before(a, b) -> bool: #boolean
-    if a > b:
+    if a < b:
         return True
     else:
         return False

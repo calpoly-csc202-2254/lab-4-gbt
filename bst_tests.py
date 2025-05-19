@@ -10,6 +10,10 @@ class BSTTests(unittest.TestCase):
     def test_example_fun(self):
         self.assertEqual(True, example_fun(34))
         self.assertEqual(False,example_fun(1423))
+        
+    def test_comes_before(self):
+        self.assertEqual(True, comes_before(2, 6))
+        self.assertEqual(False,comes_before(5,-5))
     
     def test_is_empty(self):
         self.assertEqual(True, is_empty(None))
