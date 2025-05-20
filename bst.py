@@ -28,18 +28,17 @@ class BinarySearchTree:
     right: BinTree
 #a
 # Given a BinarySearchTree, return True if tree is empty, False otherwise
-def is_empty(l : BinTree) -> bool:
+def is_empty(l: BinTree) -> bool:
     match l:
         case None:
             return True
         case BinarySearchTree(v, _, left, right):
             return False
-    return None
 
-# Adds value to tree by using comes_before function to determine which path to take @ each node,
-# inserts into left subtree if value comese before value stores, right subtree otherwise
+    # Adds value to tree by using comes_before function to determine which path to take @ each node, 
+    # inserts into left subtree if value comese before value stores, right subtree otherwise
    
-def helper(i : BinTree, new_value : Any, comes_before) -> BinTree:
+def helper(i: BinTree, new_value: Any, comes_before) -> BinTree:
     match i:
         case None:
             return BinarySearchTree(new_value, comes_before, None, None)
@@ -48,60 +47,28 @@ def helper(i : BinTree, new_value : Any, comes_before) -> BinTree:
                 return BinarySearchTree(value, comes_before, helper(left, new_value, comes_before), right)
             else:
                 return BinarySearchTree(value, comes_before, left, helper(right, new_value, comes_before))
-    return None
 
-def insert(l : BinTree, val : Any, comes_before) -> BinTree:
+def insert(l: BinTree, val: Any, comes_before) -> BinTree:
     return helper(l, val, comes_before)
     
-# Returns True if value is stored in tree and False if else
-# Instead, you will use the comes_before function to determine if the value appears in the tree.
-# More specifically, when comparing two values, if neither value "comes before" the other,
-# then the values will be considered equal (i.e., for our purposes, (not (a < b) and not (b < a)) -> a = b).
+    # Returns True if value is stored in tree and False if else
+    #Instead, you will use the comes_before function to determine if the value appears in the tree. 
+    # More specifically, when comparing two values, if neither value "comes before" the other, 
+    # then the values will be considered equal (i.e., for our purposes, (not (a < b) and not (b < a)) -> a = b).
 
-def lookup(i: BinTree, look: Any, comes_before) -> bool:
-   match i:
-       case None:
-           return False
-       case BinarySearchTree(value, comes_before, left, right):
-           if comes_before(left, value) and comes_before(right, value) is True:
-               return True
-           else:
+    def lookup(i: BinTree, look: Any, comes_before) -> bool:
+       match i:
+           case None:
                return False
-   return None
+           case BinarySearchTree(value, comes_before, left, right):
+               if comes_before(left, value) and comes_before(right, value) is True:
+                   return True
+               else: 
+                   return False
+                   
 
-# Removes value from tree (if there) while preserving binary search tree property for given node's value
-# Values in left subtree come before
-# If many nodes containing values need to be removed, only one such node will be removed
+    # Removes value from tree (if there) while preserving binary search tree property for given node's value, 
+    # if many nodes containing values need to be removed, only one such node will be removed
+    def delete():
+        pass
 
-def find_min_val(n: BinTree): # Helper function for delete function
-    if n.left is None: # Base case
-        return n.value
-    return find_min_val(n.left)
-
-
-def delete(n : BinTree, del_val : Any, comes_before) -> BinTree: # a and b for left and right subtrees (?)
-    if n is None:
-        return None
-
-    go_left = comes_before(del_val, n.value)
-
-    if go_left:
-        return BinarySearchTree(n.value, comes_before, delete(n.left, del_val, comes_before), n.right)
-    elif del_val == n.value:
-        # Case 1: no children
-        if n.left is None and n.right is None:
-            return None
-
-        # Case 2: only left child
-        if n.right is None:
-            return n.left
-
-        # Case 3: only right child
-        if n.left is None:
-            return n.right
-
-        # Case 4: two children
-        new_value = find_min_val(n.right)
-        return BinarySearchTree(new_value, comes_before, n.left, delete(n.right, new_value, comes_before))
-    else:
-        return BinarySearchTree(n.value, comes_before, n.left, delete(n.right, del_val, comes_before))
