@@ -74,18 +74,18 @@ def lookup(i: BinTree, look: Any, comes_before) -> bool:
 # Instead, you will use the comes_before function to determine if the value appears in the tree.
 # More specifically, when comparing two values, if neither value "comes before" the other,
 # then the values will be considered equal (i.e., for our purposes, (not (a < b) and not (b < a)) -> a = b).
-def lookup(i: BinTree, look: Any) -> bool:
+def lookup(i: BinTree, look: Any, comes_before) -> bool:
     match i:
         case None:
             return False
         case BinarySearchTree(value, comes_before, left, right):
-            if look == value:
+            if comes_before(look, value) is False and comes_before(value, look) is False:
                 return True
             else:
                 if left is None and right is None:
                     return False
                 else:
-                    return lookup(left, look) or lookup(right, look)
+                    return lookup(left, look, comes_before) or lookup(right, look, comes_before)
     return None
 
 # Removes value from tree (if there) while preserving binary search tree property for given node's value
