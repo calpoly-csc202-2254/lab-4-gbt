@@ -29,8 +29,8 @@ class BSTTests(unittest.TestCase):
     #     self.assertEqual(False,lookup(BinarySearchTree(3,BinarySearchTree(4,None,None),BinarySearchTree(-1,None,None)),5))
     #     self.assertEqual(True,lookup(BinarySearchTree(3,BinarySearchTree(4,None,None),BinarySearchTree(-1,None,None)),4))
         
-    # def test_delete(self):
-    #     self.assertEqual()
+    def test_delete(self):
+         self.assertEqual()
         
         
 if __name__ == '__main__':
