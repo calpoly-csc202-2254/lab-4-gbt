@@ -30,7 +30,10 @@ class BSTTests(unittest.TestCase):
         self.assertEqual(True,lookup(BinarySearchTree(3,comes_before,BinarySearchTree(4,comes_before,None,None),BinarySearchTree(-1,comes_before,None,None)),4,comes_before))
         
     def test_delete(self):
-         self.assertEqual()
+         self.assertEqual(None, delete(None,1,comes_before))
+         self.assertEqual(None, delete(BinarySearchTree(1,comes_before,None,None),1,comes_before))
+         self.assertEqual(BinarySearchTree(1,comes_before,None,None),delete(BinarySearchTree(1,comes_before,None,None),3,comes_before))
+         self.assertEqual(BinarySearchTree(6,comes_before,None,None),delete(BinarySearchTree(2,comes_before,None,BinarySearchTree(6,comes_before,None,None)),2,comes_before))
         
         
 if __name__ == '__main__':
