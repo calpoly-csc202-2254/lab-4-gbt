@@ -11,6 +11,7 @@ def example_fun(x: int) -> bool:
     return x < 142
 
 
+
 BinTree: TypeAlias = Union["BinarySearchTree", None]
 
 
@@ -64,21 +65,6 @@ def lookup(i: BinTree, look: Any, comes_before) -> bool:
         case None:
             return False
         case BinarySearchTree(value, comes_before, left, right):
-            if comes_before(left, value) and comes_before(right, value) is True:
-                return True
-            else:
-                return False
-    return None
-
-# Returns True if value is stored in tree and False if else
-# Instead, you will use the comes_before function to determine if the value appears in the tree.
-# More specifically, when comparing two values, if neither value "comes before" the other,
-# then the values will be considered equal (i.e., for our purposes, (not (a < b) and not (b < a)) -> a = b).
-def lookup(i: BinTree, look: Any, comes_before) -> bool:
-    match i:
-        case None:
-            return False
-        case BinarySearchTree(value, comes_before, left, right):
             if comes_before(look, value) is False and comes_before(value, look) is False:
                 return True
             else:
@@ -91,10 +77,11 @@ def lookup(i: BinTree, look: Any, comes_before) -> bool:
 # Removes value from tree (if there) while preserving binary search tree property for given node's value
 # Values in left subtree come before
 # If many nodes containing values need to be removed, only one such node will be removed
-def find_min_val(n: BinTree):  # Helper function for delete function
+def find_min_val(n: BinarySearchTree):  # Helper function for delete function #changed n to pass BinarySearchTree
     if n.left is None:  # Base case
         return n.value
     return find_min_val(n.left)
+
 
 def delete(n: BinTree, del_val: Any, comes_before) -> BinTree:  # a and b for left and right subtrees (?)
     if n is None:
