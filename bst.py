@@ -3,12 +3,14 @@ import sys
 import unittest
 from typing import *
 from dataclasses import dataclass
+import time
 
 sys.setrecursionlimit(10 ** 6)
 
 
 def example_fun(x: int) -> bool:
     return x < 142
+
 
 
 
@@ -109,3 +111,21 @@ def delete(n: BinTree, del_val: Any, comes_before) -> BinTree:  # a and b for le
         return BinarySearchTree(new_value, comes_before, n.left, delete(n.right, new_value, comes_before))
     else:
         return BinarySearchTree(n.value, comes_before, n.left, delete(n.right, del_val, comes_before))
+
+
+
+if __name__ ==  "__main__":
+    l = BinarySearchTree(2, comes_before, None, None)
+    start_time = time.perf_counter()
+    result = is_empty(l)
+    end_time = time.perf_counter()
+    test1 = end_time - start_time
+    print(test1)
+
+
+    l1 = BinarySearchTree(2,comes_before,None,None)
+    start_time = time.perf_counter()
+    result = insert(l1, 7, comes_before )
+    end_time = time.perf_counter()
+    test2 = end_time - start_time
+    print(test2)
