@@ -1,9 +1,12 @@
 from ast import Call
+from re import search
 import sys
+from tracemalloc import start
 import unittest
 from typing import *
 from dataclasses import dataclass
 import time
+import random
 
 sys.setrecursionlimit(10 ** 6)
 
@@ -42,6 +45,8 @@ def is_empty(l: BinTree) -> bool:
             return False
     return None
 
+
+
 # Adds value to tree by using comes_before function to determine which path to take @ each node,
 # inserts into left subtree if value comese before value stores, right subtree otherwise
 def helper(i: BinTree, new_value: Any, comes_before) -> BinTree:
@@ -57,6 +62,9 @@ def helper(i: BinTree, new_value: Any, comes_before) -> BinTree:
 
 def insert(l: BinTree, val: Any, comes_before) -> BinTree:
     return helper(l, val, comes_before)
+
+
+
 
 # Returns True if value is stored in tree and False if else
 # Instead, you will use the comes_before function to determine if the value appears in the tree.
@@ -75,6 +83,33 @@ def lookup(i: BinTree, look: Any, comes_before) -> bool:
                 else:
                     return lookup(left, look, comes_before) or lookup(right, look, comes_before)
     return None
+
+
+if __name__ ==  "__main__":
+    for size in range(100000, 1000001, 100000):
+        float_list = [random.random() for _ in range(size)]
+        l1 = None
+        start_time = time.perf_counter()
+        for num in float_list:
+            l1 = insert(l1, num, comes_before)
+        end_time = time.perf_counter()
+        test1 = end_time - start_time
+        
+  
+
+        search_list = [random.random() for _ in range(1000)]
+        start_time = time.perf_counter()
+        for num in search_list:
+            lookup(l1, num, comes_before)
+        end_time = time.perf_counter()
+        search_time = end_time - start_time
+
+        print(f"{size}\t{test1:.4f}\t{search_time:.4f}")
+
+        
+
+  
+
 
 # Removes value from tree (if there) while preserving binary search tree property for given node's value
 # Values in left subtree come before
@@ -114,18 +149,6 @@ def delete(n: BinTree, del_val: Any, comes_before) -> BinTree:  # a and b for le
 
 
 
-if __name__ ==  "__main__":
-    l = BinarySearchTree(2, comes_before, None, None)
-    start_time = time.perf_counter()
-    result = is_empty(l)
-    end_time = time.perf_counter()
-    test1 = end_time - start_time
-    print(test1)
 
 
-    l1 = BinarySearchTree(2,comes_before,None,None)
-    start_time = time.perf_counter()
-    result = insert(l1, 7, comes_before )
-    end_time = time.perf_counter()
-    test2 = end_time - start_time
-    print(test2)
+    
