@@ -80,8 +80,10 @@ def lookup(i: BinTree, look: Any, comes_before) -> bool:
             else:
                 if left is None and right is None:
                     return False
+                elif comes_before(look,value) is True:
+                    return lookup(left, look, comes_before)
                 else:
-                    return lookup(left, look, comes_before) or lookup(right, look, comes_before)
+                    return lookup(right, look, comes_before)
     return None
 
 
@@ -128,7 +130,7 @@ def delete(n: BinTree, del_val: Any, comes_before) -> BinTree:  # a and b for le
 
     if go_left:
         return BinarySearchTree(n.value, comes_before, delete(n.left, del_val, comes_before), n.right)
-    elif del_val == n.value:
+    elif comes_before(del_val, n.value) is False and comes_before(n.value, del_val) is False:
         # Case 1: no children
         if n.left is None and n.right is None:
             return None
